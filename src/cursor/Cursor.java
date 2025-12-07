@@ -1,4 +1,6 @@
-package main;
+package cursor;
+
+import main.TextEditor;
 
 public class Cursor {
     private final TextEditor textEditor;

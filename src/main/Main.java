@@ -11,6 +11,8 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Could not run TextEditor.");
             e.printStackTrace();
+        } finally {
+            System.out.println("Exiting TextEditor.");
         }
     }
 }

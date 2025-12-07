@@ -1,4 +1,4 @@
-package main;
+package cursor;
 
 public enum CursorDirection {
     UP,

@@ -1,6 +1,6 @@
 package state;
 
-import main.CursorDirection;
+import cursor.CursorDirection;
 import main.TextEditor;
 
 public class NormalState extends State {
@@ -12,6 +12,8 @@ public class NormalState extends State {
     public void handleInput(int input) {
         if (input == 'i') {
             super.textEditor.setState(new InsertState(super.textEditor));
+        } else if (input == ':') {
+            super.textEditor.setState(new CommandState(super.textEditor));
         } else if (input == 'k') {
             this.textEditor.getCursor().move(CursorDirection.UP);
         } else if (input == 'j') {

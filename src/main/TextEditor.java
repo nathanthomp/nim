@@ -6,6 +6,7 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
 
+import cursor.Cursor;
 import state.NormalState;
 import state.State;
 
@@ -17,6 +18,9 @@ public class TextEditor {
     private State state;
 
     public TextEditor() throws IOException {
+        /**
+         * Dependency injection for Terminal
+         */
         this.terminal = TerminalBuilder.builder().build();
         this.textBuffer = new TextBuffer();
         this.cursor = new Cursor(this);
@@ -41,13 +45,25 @@ public class TextEditor {
 
     public void run() throws IOException, InterruptedException {
         try {
+            /**
+             * Dependency injection for NonBlockingReader
+             */
             NonBlockingReader reader = this.terminal.reader();
             this.state.render();
             while (true) {
                 if (reader.ready()) {
+                    /**
+                     * Input input = Input.getInput(reader.read());
+                     */
                     int ch = reader.read();
+                    /**
+                     * this.state.handleInput(input);
+                     */
                     this.state.handleInput(ch);
                     this.state.render();
+                    /**
+                     * Refactor to exit properly with CommandState
+                     */
                     if (ch == 'q') {
                         break;
                     }
@@ -58,6 +74,9 @@ public class TextEditor {
             this.terminal.flush();
             this.terminal.close();
         }
+        /**
+         * Catch InterruptException
+         */
     }
 
     public int getStartingColumn() {
